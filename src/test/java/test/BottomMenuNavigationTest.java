@@ -45,4 +45,12 @@ public class BottomMenuNavigationTest extends BaseTest {
         DragScreen dragScreen = baseScreen.goToDragScreen();
         Assert.assertTrue(dragScreen.isScreenShown());
     }
+
+    @Test(testName = "Navigates to Home Screen")
+    public void navigateToHome() {
+        baseScreen.goToDragScreen(); // Navigate first to drag screen
+        baseScreen.goToBaseScreen(); // Then go back to home screen
+        Assert.assertTrue(baseScreen.isScreenShown());
+    }
+
 }

@@ -19,6 +19,12 @@ public class BaseScreen {
 
     protected AndroidDriver driver;
 
+    @AndroidFindBy(uiAutomator = "new UiSelector().text(\"WEBDRIVER\")")
+    WebElement viewHomeTitle;
+
+    @AndroidFindBy(uiAutomator = "new UiSelector().description(\"Home\")")
+    WebElement btnHome;
+
     @AndroidFindBy(uiAutomator = "new UiSelector().description(\"Webview\")")
     WebElement btnWebView;
 
@@ -39,13 +45,18 @@ public class BaseScreen {
         PageFactory.initElements(new AppiumFieldDecorator(driver), this);
     }
 
-    public boolean isScreenShown(){ return true; }
+    public boolean isScreenShown() {
+        return isElementShown(viewHomeTitle);
+    }
 
     public void navigateToBtn(WebElement element) {
         waitForElement(element);
         Gestures.tap(element, driver);
     }
 
+    public void goToBaseScreen() {
+        navigateToBtn(btnHome);
+    }
     public WebviewScreen goToWebViewScreen() {
         navigateToBtn(btnWebView);
         return new WebviewScreen(driver);
