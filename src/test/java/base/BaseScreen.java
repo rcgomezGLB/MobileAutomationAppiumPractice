@@ -41,38 +41,47 @@ public class BaseScreen {
 
     public boolean isScreenShown(){ return true; }
 
+    public void navigateToBtn(WebElement element) {
+        waitForElement(element);
+        Gestures.tap(element, driver);
+    }
+
     public WebviewScreen goToWebViewScreen() {
-        Gestures.tap(btnWebView, driver);
+        navigateToBtn(btnWebView);
         return new WebviewScreen(driver);
     }
 
     public LogInScreen goToLogInScreen() {
-        Gestures.tap(btnLogin, driver);
+        navigateToBtn(btnLogin);
         return new LogInScreen(driver);
     }
 
     public FormsScreen goToFormsScreen() {
-        Gestures.tap(btnForms, driver);
+        navigateToBtn(btnForms);
         return new FormsScreen(driver);
     }
 
     public SwipeScreen goToSwipeScreen() {
-        Gestures.tap(btnSwipe, driver);
+        navigateToBtn(btnSwipe);
         return new SwipeScreen(driver);
     }
 
     public DragScreen goToDragScreen() {
-        Gestures.tap(btnDrag, driver);
+        navigateToBtn(btnDrag);
         return new DragScreen(driver);
     }
 
     public boolean isElementShown(WebElement element) {
         try {
-            Wait<WebDriver> wait = new WebDriverWait(driver, DEFAULT_EXPLICIT_WAIT_DURATION);
-            wait.until(d -> element.isDisplayed());
+            waitForElement(element);
             return true;
         } catch (Exception e) {
             return false;
         }
+    }
+
+    public void waitForElement(WebElement element) {
+        Wait<WebDriver> wait = new WebDriverWait(driver, DEFAULT_EXPLICIT_WAIT_DURATION);
+        wait.until(d -> element.isDisplayed());
     }
 }
