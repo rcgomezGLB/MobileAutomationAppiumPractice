@@ -8,7 +8,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Wait;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import screen.WebviewScreen;
+import screen.*;
 import util.Gestures;
 
 import java.time.Duration;
@@ -22,6 +22,18 @@ public class BaseScreen {
     @AndroidFindBy(uiAutomator = "new UiSelector().description(\"Webview\")")
     WebElement btnWebView;
 
+    @AndroidFindBy(uiAutomator = "new UiSelector().description(\"Login\")")
+    WebElement btnLogin;
+
+    @AndroidFindBy(uiAutomator = "new UiSelector().description(\"Forms\")")
+    WebElement btnForms;
+
+    @AndroidFindBy(uiAutomator = "new UiSelector().description(\"Swipe\")")
+    WebElement btnSwipe;
+
+    @AndroidFindBy(uiAutomator = "new UiSelector().description(\"Drag\")")
+    WebElement btnDrag;
+
     public BaseScreen(AndroidDriver driver) {
         this.driver = driver;
         PageFactory.initElements(new AppiumFieldDecorator(driver), this);
@@ -32,6 +44,26 @@ public class BaseScreen {
     public WebviewScreen goToWebViewScreen() {
         Gestures.tap(btnWebView, driver);
         return new WebviewScreen(driver);
+    }
+
+    public LogInScreen goToLogInScreen() {
+        Gestures.tap(btnLogin, driver);
+        return new LogInScreen(driver);
+    }
+
+    public FormsScreen goToFormsScreen() {
+        Gestures.tap(btnForms, driver);
+        return new FormsScreen(driver);
+    }
+
+    public SwipeScreen goToSwipeScreen() {
+        Gestures.tap(btnSwipe, driver);
+        return new SwipeScreen(driver);
+    }
+
+    public DragScreen goToDragScreen() {
+        Gestures.tap(btnDrag, driver);
+        return new DragScreen(driver);
     }
 
     public boolean isElementShown(WebElement element) {
