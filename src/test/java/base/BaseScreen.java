@@ -92,7 +92,11 @@ public class BaseScreen {
     }
 
     public void waitForElement(WebElement element) {
-        Wait<WebDriver> wait = new WebDriverWait(driver, DEFAULT_EXPLICIT_WAIT_DURATION);
+        waitForElement(element, DEFAULT_EXPLICIT_WAIT_DURATION);
+    }
+
+    public void waitForElement(WebElement element, Duration duration) {
+        Wait<WebDriver> wait = new WebDriverWait(driver, duration);
         wait.until(d -> element.isDisplayed());
     }
 }

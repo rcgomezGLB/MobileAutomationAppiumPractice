@@ -1,6 +1,7 @@
 package util;
 
 import io.appium.java_client.android.AndroidDriver;
+import org.openqa.selenium.Dimension;
 import org.openqa.selenium.Point;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Pause;
@@ -27,6 +28,38 @@ public class Gestures {
                 .addAction(finger.createPointerDown(PointerInput.MouseButton.LEFT.asArg()))
                 .addAction(new Pause(finger,Duration.ofMillis(100)))
                 .addAction(finger.createPointerUp(PointerInput.MouseButton.LEFT.asArg()));
+        driver.perform(List.of(sequence));
+    }
+
+    public static void swipeScreen(Direction dir, AndroidDriver driver) {
+        int edgeBorder = 10; // better avoid edges
+        Point pointStart, pointEnd;
+
+        // init screen variables
+        Dimension dims = driver.manage().window().getSize();
+
+        // init start point = center of screen
+        pointStart = new Point(dims.width / 2, dims.height / 2);
+
+        pointEnd = switch (dir) {
+            case DOWN -> // center of footer
+                    new Point(dims.width / 2, dims.height - edgeBorder);
+            case UP -> // center of header
+                    new Point(dims.width / 2, edgeBorder);
+            case LEFT -> // center of left side
+                    new Point(edgeBorder, dims.height / 2);
+            case RIGHT -> // center of right side
+                    new Point(dims.width - edgeBorder, dims.height / 2);
+        };
+
+        // Execute Swipe
+        Sequence sequence = new Sequence(finger, 0)
+                .addAction(finger.createPointerMove(Duration.ZERO,PointerInput.Origin.viewport(),pointStart))
+                .addAction(finger.createPointerDown(PointerInput.MouseButton.LEFT.asArg()))
+                .addAction(new Pause(finger,Duration.ofMillis(100)))
+                .addAction(finger.createPointerMove(Duration.ofMillis(100),PointerInput.Origin.viewport(),pointEnd))
+                .addAction(finger.createPointerUp(PointerInput.MouseButton.LEFT.asArg()));
+
         driver.perform(List.of(sequence));
     }
 }
