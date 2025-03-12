@@ -10,10 +10,12 @@ import java.net.URI;
 public class BaseTest {
 
     protected static AndroidDriver driver;
+    protected BaseScreen baseScreen;
 
     @BeforeMethod
     public void setUp() {
         driver = createAndroidDriver();
+        baseScreen = new BaseScreen(driver);
     }
 
     @AfterMethod

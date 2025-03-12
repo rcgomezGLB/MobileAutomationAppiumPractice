@@ -3,18 +3,10 @@ package test;
 import base.BaseScreen;
 import base.BaseTest;
 import org.testng.Assert;
-import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import screen.*;
 
 public class BottomMenuNavigationTest extends BaseTest {
-
-    private BaseScreen baseScreen;
-
-    @BeforeMethod
-    public void setUpTest() {
-        baseScreen = new BaseScreen(driver);
-    }
 
     @Test(testName = "Navigates to Web view screen")
     public void navigateToWebview() {
