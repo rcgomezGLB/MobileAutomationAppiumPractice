@@ -30,12 +30,12 @@ public class SwipeTest extends BaseTest {
     }
 
     @Test(testName = "Swipe right to the last card and verify that the card is the only one visible on the screen")
-    public void lastCardIsTeOnlyCard() {
+    public void lastCardIsTheOnlyCardShown() {
         swipeScreen.swipeToLastCard();
         Assert.assertEquals(swipeScreen.getVisibleCardsIds().size(), 1);
     }
 
-    @Test
+    @Test(testName = "Swipe vertically until you find \"You found me!!!\" and verify the text")
     public void verifyYouFoundMe() {
         Assert.assertEquals(swipeScreen.getYouFoundMeText(), "You found me!!!");
     }
