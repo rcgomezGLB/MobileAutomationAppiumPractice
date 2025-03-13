@@ -40,7 +40,7 @@ public class SignUpScreen extends BaseScreen {
         textEmail.sendKeys(email);
         textPassword.sendKeys(password);
         textConfirmPassword.sendKeys(password);
-        Gestures.swipeScreen(Direction.UP, driver);
+        Gestures.swipeScreenFromCenter(Direction.UP, driver);
         Gestures.tap(btnSignUp, driver);
     }
 

@@ -3,8 +3,7 @@ package screen;
 import base.BaseScreen;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.pagefactory.AndroidFindBy;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.remote.RemoteWebElement;
 import org.openqa.selenium.support.ui.Wait;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -22,6 +21,13 @@ public class SwipeScreen extends BaseScreen {
     @AndroidFindBy(uiAutomator = "new UiSelector().description(\"card\")")
     private List<RemoteWebElement> shownCards; // RemoteWebElement is used because it allows additional methods, such as getId
 
+    @AndroidFindBy(uiAutomator = "new UiSelector().text(\"You found me!!!\")")
+    private WebElement lblYouFoundMe;
+
+    @AndroidFindBy(uiAutomator = "new UiSelector().description(\"Swipe-screen\")")
+    private WebElement scrollView;
+
+
     public SwipeScreen(AndroidDriver driver) {
         super(driver);
     }
@@ -37,7 +43,7 @@ public class SwipeScreen extends BaseScreen {
 
     public void swipeToNextCard() {
         String previousCardId = getSelectedCardId();
-        Gestures.swipeScreen(Direction.LEFT, driver);
+        Gestures.swipeScreenFromCenter(Direction.LEFT, driver);
 
         // Wait for card is last or current card id changes (swipe completed)
         Wait<WebDriver> wait = new WebDriverWait(driver, DEFAULT_EXPLICIT_WAIT_DURATION);
@@ -49,6 +55,30 @@ public class SwipeScreen extends BaseScreen {
     public void swipeToLastCard() {
         while (!isCardLast()) {
             swipeToNextCard();
+        }
+    }
+
+    public String getYouFoundMeText() {
+        scrollToYouFoundMeElement();
+        return lblYouFoundMe.getText();
+    }
+
+    public void scrollToYouFoundMeElement() {
+        int border = 10;
+        Rectangle viewRectangle = scrollView.getRect();
+        Point startPoint = new Point(viewRectangle.getX() + viewRectangle.width / 2, viewRectangle.getY() + viewRectangle.height - border);
+
+        Gestures.swipeScreenFromElement(Direction.UP, viewTitle, driver);
+        Gestures.swipeScreenFromPoint(Direction.UP, startPoint, driver);
+
+        boolean foundElement = false;
+        while (!foundElement) {
+            try {
+                lblYouFoundMe.isDisplayed();
+                foundElement = true;
+            } catch (NoSuchElementException e) {
+                Gestures.swipeScreenFromCenter(Direction.UP, driver);
+            }
         }
     }
 

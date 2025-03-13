@@ -35,4 +35,9 @@ public class SwipeTest extends BaseTest {
         Assert.assertEquals(swipeScreen.getVisibleCardsIds().size(), 1);
     }
 
+    @Test
+    public void verifyYouFoundMe() {
+        Assert.assertEquals(swipeScreen.getYouFoundMeText(), "You found me!!!");
+    }
+
 }
