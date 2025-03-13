@@ -29,4 +29,10 @@ public class SwipeTest extends BaseTest {
         }
     }
 
+    @Test(testName = "Swipe right to the last card and verify that the card is the only one visible on the screen")
+    public void lastCardIsTeOnlyCard() {
+        swipeScreen.swipeToLastCard();
+        Assert.assertEquals(swipeScreen.getVisibleCardsIds().size(), 1);
+    }
+
 }

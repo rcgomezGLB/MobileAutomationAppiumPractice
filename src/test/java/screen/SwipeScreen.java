@@ -46,6 +46,12 @@ public class SwipeScreen extends BaseScreen {
                 ));
     }
 
+    public void swipeToLastCard() {
+        while (!isCardLast()) {
+            swipeToNextCard();
+        }
+    }
+
     public boolean isCardLast() {
         return shownCards.size() == 1;
     }
