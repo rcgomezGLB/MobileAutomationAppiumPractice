@@ -1,0 +1,26 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+
+<suite name="Web Driver IO Demo Automated Tests Suite" verbose="1">
+
+    <test name="Navigation tests">
+        <classes>
+            <class name="test.BottomMenuNavigationTest"/>
+        </classes>
+    </test>
+    <test name="Log in test">
+        <classes>
+            <class name="test.LogInTest"/>
+        </classes>
+    </test>
+    <test name="Sign up test">
+        <classes>
+            <class name="test.SignUpTest"/>
+        </classes>
+    </test>
+    <test name="Swipe tests">
+        <classes>
+            <class name="test.SwipeTest"/>
+        </classes>
+    </test>
+
+</suite>
