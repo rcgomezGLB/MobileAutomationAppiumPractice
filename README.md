@@ -69,7 +69,7 @@ The following describes the file structure of the project:
 
 ## Prerequisites
 
-- **Java JDK**: Ensure Java is installed on your machine.
+- **Java 21 JDK**: Ensure Java is installed on your machine.
 - **Appium**: Install Appium and its dependencies.
 - **Android Studio**: Install Android Studio for emulators and SDK tools.
 - **TestNG**: Add TestNG to your project dependencies.
