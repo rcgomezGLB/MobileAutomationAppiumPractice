@@ -1,6 +1,5 @@
 package test;
 
-import base.BaseScreen;
 import base.BaseTest;
 import org.testng.Assert;
 import org.testng.annotations.Test;
